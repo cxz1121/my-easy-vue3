@@ -8,4 +8,13 @@ describe('readonly', () => {
     expect(readonlyData).not.toBe(data)
     expect(readonlyData.age).toBe(33)
   })
+
+  it('warn when set', () => {
+    const state = readonly({ age: 33 })
+    //jest.fn()
+    console.warn = jest.fn()
+    state.age++
+
+    expect(console.warn).toBeCalled()
+  })
 })
