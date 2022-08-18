@@ -6,7 +6,7 @@ class ReactiveEffect {
   run() {
     try {
       activeEffect = this
-      this.fn()
+      return this.fn()
     } finally {
       activeEffect = undefined
     }
@@ -18,6 +18,10 @@ export function effect(fn) {
   const _effect = new ReactiveEffect(fn)
 
   _effect.run()
+
+  const runner = _effect.run.bind(_effect)
+
+  return runner
 }
 
 const targetMap = new WeakMap()
