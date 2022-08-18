@@ -2,7 +2,7 @@ let activeEffect
 
 class ReactiveEffect {
   public deps = []
-  constructor(private fn) {}
+  constructor(private fn, public scheduler?) {}
   run() {
     try {
       activeEffect = this
@@ -13,9 +13,9 @@ class ReactiveEffect {
   }
 }
 
-export function effect(fn) {
+export function effect(fn, options: any = {}) {
   // fn
-  const _effect = new ReactiveEffect(fn)
+  const _effect = new ReactiveEffect(fn, options.scheduler)
 
   _effect.run()
 
@@ -56,6 +56,10 @@ export function trigger(target, key) {
 export function triggerEffect(effects) {
   effects = new Set(effects)
   effects.forEach((effect) => {
-    effect.run()
+    if (effect.scheduler) {
+      effect.scheduler()
+    } else {
+      effect.run()
+    }
   })
 }
