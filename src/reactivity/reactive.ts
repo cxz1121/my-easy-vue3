@@ -23,3 +23,18 @@ export function reactive(target) {
 
   return proxy
 }
+
+export function readonly(target) {
+  const proxy = new Proxy(target, {
+    get(target, key, receiver) {
+      const res = Reflect.get(target, key, receiver)
+      return res
+    },
+    //not set
+    set() {
+      console.warn('readonly')
+      return true
+    }
+  })
+  return proxy
+}
