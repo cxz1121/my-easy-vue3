@@ -9,7 +9,7 @@ function cleanupEffect(effect) {
   effect.deps.length = 0
 }
 
-class ReactiveEffect {
+export class ReactiveEffect {
   public deps = []
   public active = true
   public parent = null
