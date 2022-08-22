@@ -73,7 +73,8 @@ describe('effect', () => {
     data.num = 2
     expect(dummy).toBe(2)
     stop(runner)
-    data.num = 3
+    // data.num = 3
+    data.num++
     expect(dummy).toBe(2)
 
     runner()

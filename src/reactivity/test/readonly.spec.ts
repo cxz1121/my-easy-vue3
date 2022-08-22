@@ -9,6 +9,7 @@ describe('readonly', () => {
     expect(readonlyData).not.toBe(data)
     expect(readonlyData.age).toBe(33)
     expect(isReadonly(readonlyData)).toBe(true)
+    expect(isReadonly(readonlyData.info)).toBe(true)
     expect(isReadonly(reactiveData)).toBe(false)
     expect(isReadonly(data)).toBe(false)
   })
