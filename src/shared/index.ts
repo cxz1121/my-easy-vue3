@@ -1,4 +1,5 @@
 export const extend = Object.assign
+export const isArray = Array.isArray
 
 export function isObject(value) {
   return typeof value === 'object' && value !== null
